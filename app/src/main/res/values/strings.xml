@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Cat Tapper</string>
+    <string name="title1">Cat</string>
+    <string name="title2">Tapper</string>
+    <string name="startBtn">START!</string>
+    <string name="instructionBtn">Instructions</string>
+    <string name="goBackBtn">Go Back</string>
+    <string name="startGameBtn">StART GAME! temp</string>
+    <string name="catBtn">cat</string>
+    <string name="hitboxBtn">Start with Hitboxes</string>
+    <string name="hitboxWonBG">Hitbox ON</string>
+</resources>
