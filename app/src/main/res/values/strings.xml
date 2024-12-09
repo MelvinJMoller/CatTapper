@@ -9,4 +9,5 @@
     <string name="catBtn">cat</string>
     <string name="hitboxBtn">Start with Hitboxes</string>
     <string name="hitboxWonBG">Hitbox ON</string>
+    <string name="startTablet">Start on Tablet</string>
 </resources>

@@ -52,8 +52,8 @@
         android:id="@+id/hitboxBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
         android:background="#22FF0000"
         android:text="@string/hitboxBtn"
         android:textColor="@color/black"
@@ -70,6 +70,18 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/chronometer"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/startTablet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:background="#22FF0000"
+        android:text="@string/startTablet"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/hitboxBtn"
+        app:layout_constraintTop_toBottomOf="@+id/startGameButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,9 +32,11 @@ class GameActivity : AppCompatActivity() {
         var gameLevel = 0
         var playerScore = 0
         var hitboxOn = 0
+        var tabletMode = 0
         val startButton = findViewById<Button>(R.id.startGameButton)
         val catPress = findViewById<Button>(R.id.catButton)
         val hitboxButton = findViewById<Button>(R.id.hitboxBtn)
+        val tabletButton = findViewById<Button>(R.id.startTablet)
         val hitboxMessage = findViewById<TextView>(R.id.hitboxWon)
         val levelImage = findViewById<ImageView>(R.id.levelImage)
         val chronoTimer = findViewById<Chronometer>(R.id.chronometer)
@@ -108,6 +110,62 @@ class GameActivity : AppCompatActivity() {
             }// ADD MORE LEVELS!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
 
+        // Function for loading a level on a bigger display
+        fun levelLoadTablet(a: Int) {
+            // This is used to try and correctly move the hitboxes for a bigger display
+            if (gameLevel == 1) {
+                levelImage.setImageResource(R.drawable.piclevel1)
+                catPress.setTextSize(120F)
+                catPress.setX(130F)
+                catPress.setY(550F)
+            } else if (gameLevel == 2) {
+                levelImage.setImageResource(R.drawable.piclevel2)
+                catPress.setTextSize(22F)
+                catPress.setX(310F)
+                catPress.setY(370F)
+            } else if (gameLevel == 3) {
+                levelImage.setImageResource(R.drawable.piclevel3)
+                catPress.setTextSize(60F)
+                catPress.setX(60F)
+                catPress.setY(350F)
+            } else if (gameLevel == 4) {
+                levelImage.setImageResource(R.drawable.piclevel4)
+                catPress.setTextSize(28F)
+                catPress.setX(510F)
+                catPress.setY(880F)
+            } else if (gameLevel == 5) {
+                levelImage.setImageResource(R.drawable.piclevel5)
+                catPress.setTextSize(50F)
+                catPress.setX(70F)
+                catPress.setY(950F)
+            } else if (gameLevel == 6) {
+                levelImage.setImageResource(R.drawable.piclevel6)
+                catPress.setTextSize(32F)
+                catPress.setX(75F)
+                catPress.setY(880F)
+            } else if (gameLevel == 7) {
+                levelImage.setImageResource(R.drawable.piclevel7)
+                catPress.setTextSize(22F)
+                catPress.setX(500F)
+                catPress.setY(800F)
+            } else if (gameLevel == 8) {
+                levelImage.setImageResource(R.drawable.piclevel8)
+                catPress.setTextSize(2F)
+                catPress.setX(450F)
+                catPress.setY(400F)
+            } else if (gameLevel == 9) {
+                levelImage.setImageResource(R.drawable.piclevel9)
+                catPress.setTextSize(2F)
+                catPress.setX(400F)
+                catPress.setY(850F)
+            } else if (gameLevel == 10) {
+                levelImage.setImageResource(R.drawable.piclevel10)
+                catPress.setTextSize(120F)
+                catPress.setX(70F)
+                catPress.setY(200F)
+            }// ADD MORE LEVELS!!!!!!!!!!!!!!!!!!!!!!!!!!
+        }
+
         // Decides which the next sound effect is going to be
         fun soundEffectFunction(a: Int) {
             if (a == 1) {
@@ -154,7 +212,12 @@ class GameActivity : AppCompatActivity() {
                 catPress.setY(0F)
 
                 // Run levelLoad Function, setting up level!
-                levelLoad(gameLevel)
+                // If tablet mode is chosen, runs the tablet function instead
+                if (tabletMode == 1) {
+                    levelLoadTablet(gameLevel)
+                } else {
+                    levelLoad(gameLevel)
+                }
 
                 // When player has reached 10 Score, the game ends!
                 if (playerScore == 10) {
@@ -169,15 +232,9 @@ class GameActivity : AppCompatActivity() {
                     chronoTimer.stop()
                     chronoTimer.setTextColor(Color.BLACK)
 
-                    // If game is won with hitboxes on, a message will indicate it
-                    if (hitboxOn == 1) {
-                        catPress.setVisibility(View.INVISIBLE)
-                        println("YOU WON!")
-                        hitboxMessage.setTextColor(Color.parseColor("#000000"))
-                    } else {
-                        catPress.setVisibility(View.INVISIBLE)
-                        println("YOU WON!")
-                    }
+                    // Displays the win screen
+                    catPress.setVisibility(View.INVISIBLE)
+                    println("YOU WON!")
                 }
             }
 
@@ -206,25 +263,33 @@ class GameActivity : AppCompatActivity() {
             gameFunction(gameStarted, gameLevel, playerScore) // Runs the game function
             startButton.setVisibility(View.INVISIBLE)       // Remove Button
             hitboxButton.setVisibility(View.INVISIBLE)
+            tabletButton.setVisibility(View.INVISIBLE)
         }
         // Starts the game with hitboxes on
         hitboxButton.setOnClickListener {
-            gameStarted = 1
             hitboxOn = 1
+            // Gives background to Cat Button
+            catPress.backgroundTintList = getColorStateList(android.R.color.holo_purple)
+            hitboxMessage.setTextColor(Color.parseColor("#000000"))
+        }
+
+        // Starts the game in "Tablet mode"
+        // Moves the hitboxes to better fit tablets
+        tabletButton.setOnClickListener {
+            gameStarted = 1
+            tabletMode = 1
             chronoTimer.start()
             musicBG.start()
 
-            // Gives background to Cat Button
-            catPress.backgroundTintList = getColorStateList(android.R.color.holo_purple)
-
-            val randomNumbers = (1..10).random()
+            val randomNumbers = (10..10).random()
             gameLevel = randomNumbers
             println("Level:")
             println(gameLevel)
-            levelLoad(gameLevel)
+            levelLoadTablet(gameLevel)
             gameFunction(gameStarted, gameLevel, playerScore)
             startButton.setVisibility(View.INVISIBLE)
             hitboxButton.setVisibility(View.INVISIBLE)
+            tabletButton.setVisibility(View.INVISIBLE)
         }
     }
 }
